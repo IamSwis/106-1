@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- Link to custom styles -->
+    <link rel="stylesheet" href="./styles/mystyles.css">
+    <!-- Bootstrap CSS for styling -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+<body>
+    <h1 class="title">Task Manager</h1>
+    <div class="container">
+        <!-- Section A displays the list of tasks -->
+        <div id="section-a">
+            <h2>Section A: List of Elements</h2>
+            <ul id="element-list">
+                <!-- Dynamically added list items will appear here -->
+            </ul>
+        </div>
+        <!-- Button to toggle the visibility of the form -->
+        <button id="toggle-form-btn" class="btn btn-info mb-3">Click for More</button>
+
+        <!-- Section B contains the form for adding new tasks -->
+        <div id="section-b"><!--Refer to the css file for more information (this is where i set the form to be hidden when the page loads, the default behvaior uis to have it shown)-->
+            <h2>Title of Task</h2>
+            <form id="add-element-form">
+                <!-- Input field for the task name -->
+                <input type="text" id="new-element" class="form-control mb-2" placeholder="What is the task?" required>
+
+                <!-- Textarea for the task description -->
+                <textarea rows="3" id="new-description" class="form-control mb-2" placeholder="Enter description of task?" required></textarea>
+
+                <!-- Input field for the task start date -->
+                <input type="date" id="task-start-date" class="form-control mb-2" required>
+
+                <!-- Dropdown for selecting the task status -->
+                <select id="task-status" class="form-control mb-2" required>
+                    <option value="">Select status</option>
+                    <option value="generating_coa">Generating COA</option>
+                    <option value="coa_chosen">COA Chosen</option>
+                    <option value="in_progress">In Progress</option>
+                    <option value="completed">Completed</option>
+                </select>
+
+                <!-- Input field for the task budget -->
+                <input type="number" id="task-budget" class="form-control mb-2" placeholder="Enter budget in USD" required min="0">
+
+                <!-- Input field for selecting a color associated with the task -->
+                <input type="color" id="new-color" class="form-control form-control-color mb-2" required>
+
+                <!-- Submission button for the form -->
+                <button class="btn btn-primary" type="submit">Add to List</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- jQuery library -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" crossorigin="anonymous"></script>
+    <script>
+        // Script executes after the DOM is fully loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            const formSection = document.getElementById('section-b');
+            const toggleButton = document.getElementById('toggle-form-btn');
+
+            // Check the initial visibility from the computed style
+            const isFormInitiallyVisible = window.getComputedStyle(formSection).display !== 'none';
+
+            // Set the initial state of the form and button text based on the CSS
+            formSection.style.display = isFormInitiallyVisible ? 'block' : 'none';
+            toggleButton.textContent = isFormInitiallyVisible ? 'Hide Form' : 'Show Form';
+            // Handles the form submission
+            function handleFormSubmit(event) {
+                event.preventDefault(); // Prevents the default form submission behavior
+                //Form submission Logic which basically means this is what we want to happen here
+                const newElementInput = document.getElementById('new-element');
+                const newDescriptionInput = document.getElementById('new-description');
+                const startDateInput = document.getElementById('task-start-date');
+                const statusInput = document.getElementById('task-status');
+                const budgetInput = document.getElementById('task-budget');
+
+                // Validates that all fields are filled in
+                if (!newElementInput.value.trim() || !newDescriptionInput.value.trim() || 
+                !startDateInput.value || !statusInput.value || !budgetInput.value) {
+                    alert('Please fill in all fields correctly.');
+                    return;
+                }
+
+                // Ensures the budget is a positive number
+                if (parseFloat(budgetInput.value) < 0) {
+                    alert('Please enter a valid budget (positive number).');
+                    return;
+                }
+
+                // Adds the new task to the list in Section A
+                const list = document.getElementById('element-list');
+                const listItem = document.createElement('li');
+                listItem.classList.add("list-group-item");
+                listItem.innerHTML = `<strong>${newElementInput.value.trim()}</strong>: ${newDescriptionInput.value.trim()}<br>
+                                    Start Date: ${startDateInput.value}<br>
+                                    Status: ${statusInput.options[statusInput.selectedIndex].text}<br>
+                                    Budget: $${budgetInput.value}`;
+                list.appendChild(listItem);
+
+                // Clears the input fields after submission
+                newElementInput.value = '';
+                newDescriptionInput.value = '';
+                startDateInput.value = '';
+                statusInput.selectedIndex = 0;
+                budgetInput.value = '';
+            }
+
+            // Toggles the form's visibility on double-click
+            function toggleForm() {
+                const formSection = document.getElementById('section-b');
+                formSection.style.display = formSection.style.display === 'none' ? 'block' : 'none';
+                document.getElementById('toggle-form-btn').textContent = formSection.style.display === 'block' ? 'Hide Form' : 'Show Form';
+            }
+
+            // Attaches event listeners for form submission and form toggle
+            document.getElementById('add-element-form').addEventListener('submit', handleFormSubmit);
+            document.getElementById('toggle-form-btn').addEventListener('click', toggleForm);
+        });
+    </script>
+</body>
+</html>

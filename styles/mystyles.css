@@ -1,0 +1,153 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 20px;
+}
+#section-a, #section-b {
+    flex: 1; /* Makes both sections take up equal space */
+    padding: 20px;
+    border-radius:25px;
+
+}
+#section-a {
+    margin-right: 20px; /* ---------------Adds some space between the sections ---------------*/
+}
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+input[type="text"] {
+    padding: 10px;
+    margin-bottom: 10px;
+    width: calc(100% - 22px); /* Adjusts input width to fit its container */
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+
+/* ---------------------Everything below here is for styling the page using bootstrap-------------------- */ 
+/* Custom list item styling */
+#element-list li {
+    background-color: #f8f9fa; /* Light grey background, for example */
+    border-left: 5px solid #007bff; /* Add a blue accent border to the left */
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+/* Custom form input styling */
+#add-element-form input[type="text"] {
+    border: 2px solid #007bff; /* Blue border for the input */
+}
+
+/* Custom button styling */
+#add-element-form button{ 
+    background-color:#2575fc; /* Bootstrap success color for the button */
+    border-color: #2575fc; /* Ensure the border matches */
+}
+/* Button hover effect */
+#add-element-form button:hover {
+    background-color: #218838; /* Darker green on hover */
+    border-color: #1e7e34;
+}
+
+
+/*------------------below is adding texture and stykle--------------------------*/ 
+/* Text color */
+h2 {
+    color: #007bff; /* Bootstrap primary blue */
+}
+
+/* Background color for Section A */
+#section-a {
+    background-image: linear-gradient(to right, #6a11cb 0%, #2575fc 100%);
+    /* Light gray */
+}
+
+/* Background color for list items */
+#element-list li {
+    background-color: #ffffff; /* White */
+    border-left: 5px solid #007bff; /* Blue accent border */
+}
+
+
+/* Button background color */
+button {
+    background-color: #2575fc; /* Blue surrounding around button */
+    color: #ffffff; /* White text */
+}
+/* Body background texture */
+body {
+    background-image: url('https://images.pixexid.com/3d-geometric-wallpaper-abstract-white-hexagon-pattern-hexagonal-texture-backgr-dozbebiy.webp?h=700&q=70');
+    background-size: cover; /* Cover the entire page */
+    background-position: center; /* Center the background image */
+}
+
+/* Gradient background for Section B */
+#section-b {
+    background-image: linear-gradient(to right, #6a11cb 0%, #2575fc 100%);
+    color: #0b0a0a; /* Ensure text ------------Title of Task-----is readable on the gradient */
+    display: none; /* Hide the form when page loads*/
+    
+}
+@media (max-width: 768px) {
+    /* Adjust background and text colors for smaller screens */
+    #section-a, #section-b {
+        background-color: #ffffff; 
+        /* Lighter background for readability */
+    }
+}
+h1{
+    background-image: linear-gradient(to right, #6a11cb 0%, #2575fc 100%);
+    
+    color: #080809; /* White text color for contrast */
+    padding: 10px; /* Add some padding around the text */
+    border-radius: 5px; /* Optional: rounds the corners of the background */
+    text-align: center; /* Center-align the text */
+    margin-bottom: 20px; /* Add some space below the heading */
+}
+
+/*This area ois for the description box */
+/* Bubbly Description Box */
+#new-description {
+    border-radius: 25px; /* Rounded edges for a bubbly look */
+    padding: 15px; /* More padding for a spacious feel */
+    border: 2px solid #007bff; /* Solid border with a color of your choice */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow for a lifted effect */
+    transition: all 0.3s ease; /* Smooth transition for focus effect */
+}
+
+#new-description:focus {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* More pronounced shadow on focus */
+    outline: none; /* Remove default focus outline */
+    border-color: #0056b3; /* Darker border on focus for contrast */
+}
+
+/*----------------------------This section is for styling the show/shide button------------------------------------*/
+#toggle-form-btn {
+    background-color: #2575fc; /* Blue button background */
+    color: white; /* White text */
+    font-size: 16px; /* Larger font size */
+    padding: 20px 20px; /* Padding for a larger button */
+    border: none; /* Remove default border */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Cursor changes to a hand icon when hovered */
+    transition: background-color 0.3s, transform 0.2s; /* Smooth background color transition and transform */
+}
+
+#toggle-form-btn:hover {
+    background-color: #45a049; /*  shade of green when hovered */
+    transform: scale(1.05); /* Slightly increase the size when hovered */
+}
+
+#toggle-form-btn:active {
+    transform: scale(0.95); /* Slightly decrease the size when clicked */
+}
